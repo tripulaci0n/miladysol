@@ -28,6 +28,18 @@
             padding: 20px;
             text-align: center;
             font-size: 22px; /* Appropriately sized */
+            white-space: nowrap;
+            overflow: hidden;
+            position: relative;
+        }
+        .sub-header::before {
+            content: attr(data-text);
+            position: absolute;
+            animation: marquee 10s linear infinite;
+        }
+        @keyframes marquee {
+            from { left: 100%; }
+            to { left: -100%; }
         }
         .ca-code {
             text-align: center;
@@ -70,16 +82,23 @@
             bottom: 0;
             width: 100%;
         }
+        .copy-notification {
+            text-align: center;
+            color: #7200a1;
+            font-size: 18px;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
 
 <div class="header">$MILADY on SOL</div>
-<div class="sub-header">Community takeover coin made with bits of real miladys</div>
+<div class="sub-header" data-text="Community takeover coin made with bits of real miladys">______</div>
 <div class="ca-code" onclick="copyText('HB2pjBPuquh1XGEVC1GCKepdh4daoJnkJiHFmaorfBWu')">
     CA: <span id="caText">HB2pjBPuquh1XGEVC1GCKepdh4daoJnkJiHFmaorfBWu</span>
     <i class="fas fa-copy"></i>
 </div>
+<div class="copy-notification" id="copyNotification"></div>
 
 <div class="content">
     <img src="milady.jpeg" alt="I showed you my milady please respond" width="25%">
@@ -95,7 +114,8 @@
 <script>
 function copyText(text) {
     navigator.clipboard.writeText(text).then(() => {
-        alert("Copied to clipboard: " + text);
+        document.getElementById('copyNotification').textContent = 'Copied to clipboard: ' + text;
+        setTimeout(() => document.getElementById('copyNotification').textContent = '', 2000); // Clear notification after 2 seconds
     }).catch(err => {
         console.error('Failed to copy: ', err);
     });
