@@ -35,6 +35,7 @@
             padding: 20px;
             background-color: #ffffff; /* White background for contrast */
             color: #000; /* Ensuring readability */
+            cursor: pointer; /* Indicates clickable */
         }
         .content {
             display: flex;
@@ -70,13 +71,15 @@
             width: 100%;
         }
     </style>
-    
 </head>
 <body>
 
 <div class="header">$MILADY on SOL</div>
 <div class="sub-header">Community takeover coin made with bits of real miladys</div>
-<div class="ca-code">CA: HB2pjBPuquh1XGEVC1GCKepdh4daoJnkJiHFmaorfBWu</div>
+<div class="ca-code" onclick="copyText('HB2pjBPuquh1XGEVC1GCKepdh4daoJnkJiHFmaorfBWu')">
+    CA: <span id="caText">HB2pjBPuquh1XGEVC1GCKepdh4daoJnkJiHFmaorfBWu</span>
+    <i class="fas fa-copy"></i>
+</div>
 
 <div class="content">
     <img src="milady.jpeg" alt="I showed you my milady please respond" width="25%">
@@ -88,6 +91,16 @@
 </div>
 
 <div class="footer">Made with <3 by ChatGPT in minutes flat. Copyright &copy; 2024. All rights reserved.</div>
+
+<script>
+function copyText(text) {
+    navigator.clipboard.writeText(text).then(() => {
+        alert("Copied to clipboard: " + text);
+    }).catch(err => {
+        console.error('Failed to copy: ', err);
+    });
+}
+</script>
 
 </body>
 </html>
